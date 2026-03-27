@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fullstack Developer Onboarding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Thai:wght@300;400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --surface: #141720;
+      --surface2: #1c2030;
+      --border: #252a3a;
+      --accent: #4f8ef7;
+      --accent2: #7dd3a8;
+      --accent3: #f4a74b;
+      --text: #e8edf5;
+      --text-muted: #7a8fa8;
+      --text-dim: #a8bbd0;
+      --tag-bg: #1e2740;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', 'IBM Plex Sans Thai', sans-serif;
+      font-weight: 400;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #0d0f14 0%, #111827 50%, #0d1117 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 0 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(79,142,247,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -40px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(125,211,168,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .hero-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 20px;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero-sub {
+      color: var(--text-dim);
+      font-size: 16px;
+      max-width: 640px;
+    }
+
+    /* LANG TOGGLE */
+    .lang-toggle {
+      position: fixed;
+      top: 20px; right: 24px;
+      z-index: 100;
+      display: flex;
+      gap: 0;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .lang-btn {
+      padding: 8px 16px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* CONTENT */
+    .content {
+      padding: 56px 0 80px;
+    }
+
+    .section {
+      margin-bottom: 56px;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+
+    .section-header-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      width: 40px; height: 40px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-icon img {
+      width: 20px; height: 20px;
+      object-fit: contain;
+      opacity: 0.85;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* STACK GRID */
+    .stack-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .stack-category {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .stack-cat-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      width: 110px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .stack-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .stack-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, background 0.2s;
+      cursor: default;
+    }
+
+    .stack-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-frontend  { background: rgba(79,142,247,0.15); color: #4f8ef7; }
+    .badge-database  { background: rgba(125,211,168,0.15); color: #7dd3a8; }
+    .badge-infra     { background: rgba(244,167,75,0.15); color: #f4a74b; }
+    .badge-ai        { background: rgba(167,139,250,0.15); color: #a78bfa; }
+    .badge-tools     { background: rgba(251,113,133,0.15); color: #fb7185; }
+    .badge-cicd      { background: rgba(34,211,238,0.15); color: #22d3ee; }
+    .badge-quality   { background: rgba(163,230,53,0.15); color: #a3e635; }
+
+    .cat-frontend   .stack-cat-label { color: #4f8ef7; }
+    .cat-frontend   .stack-pill:hover { border-color: #4f8ef7; background: rgba(79,142,247,0.07); }
+    .cat-database   .stack-cat-label { color: #7dd3a8; }
+    .cat-database   .stack-pill:hover { border-color: #7dd3a8; background: rgba(125,211,168,0.07); }
+    .cat-ai         .stack-cat-label { color: #a78bfa; }
+    .cat-ai         .stack-pill:hover { border-color: #a78bfa; background: rgba(167,139,250,0.07); }
+    .cat-automation .stack-cat-label { color: #fb7185; }
+    .cat-automation .stack-pill:hover { border-color: #fb7185; background: rgba(251,113,133,0.07); }
+    .cat-infra      .stack-cat-label { color: #f4a74b; }
+    .cat-infra      .stack-pill:hover { border-color: #f4a74b; background: rgba(244,167,75,0.07); }
+    .cat-quality    .stack-cat-label { color: #a3e635; }
+    .cat-quality    .stack-pill:hover { border-color: #a3e635; background: rgba(163,230,53,0.07); }
+    .cat-comms      .stack-cat-label { color: #22d3ee; }
+    .cat-comms      .stack-pill:hover { border-color: #22d3ee; background: rgba(34,211,238,0.07); }
+
+    .tool-logo {
+      width: 15px;
+      height: 15px;
+      object-fit: contain;
+      flex-shrink: 0;
+      opacity: 0.85;
+    }
+
+    .tool-logo-letter {
+      width: 15px;
+      height: 15px;
+      border-radius: 3px;
+      background: var(--surface2);
+      font-size: 8px;
+      font-weight: 800;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* DAY 1 PREP */
+    .prep-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .prep-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .prep-row-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      width: 110px;
+      flex-shrink: 0;
+      padding-top: 9px;
+    }
+
+    .prep-row-install .prep-row-label { color: #f4a74b; }
+    .prep-row-join    .prep-row-label { color: #4f8ef7; }
+    .prep-row-access  .prep-row-label { color: #a78bfa; }
+    .prep-row-db      .prep-row-label { color: #7dd3a8; }
+
+    .prep-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .prep-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: border-color 0.15s, opacity 0.15s;
+      user-select: none;
+    }
+
+    .prep-item:hover { border-color: var(--accent); }
+
+    .prep-check {
+      width: 13px;
+      height: 13px;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+
+    .prep-item.done { opacity: 0.35; }
+    .prep-item.done .prep-check {
+      background: #7dd3a8;
+      border-color: #7dd3a8;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: 11px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .prep-item.done .prep-name { text-decoration: line-through; }
+
+    .prep-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .prep-link {
+      font-size: 10px;
+      color: var(--text-dim);
+      opacity: 0.5;
+      text-decoration: none;
+      margin-left: 2px;
+      transition: opacity 0.15s;
+    }
+
+    .prep-link:hover { opacity: 1; color: var(--accent); }
+
+    /* TEAM RHYTHM */
+    .cadence-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .cadence-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cadence-freq {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-self: flex-start;
+    }
+
+    .cadence-daily .cadence-freq  { background: rgba(79,142,247,0.12); color: #4f8ef7; border: 1px solid rgba(79,142,247,0.25); }
+    .cadence-sprint .cadence-freq { background: rgba(167,139,250,0.12); color: #a78bfa; border: 1px solid rgba(167,139,250,0.25); }
+    .cadence-daily  { border-left: 3px solid rgba(79,142,247,0.4); }
+    .cadence-sprint { border-left: 3px solid rgba(167,139,250,0.4); }
+
+    .cadence-time {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .cadence-daily  .cadence-time { color: #4f8ef7; }
+    .cadence-sprint .cadence-time { color: #a78bfa; }
+
+    .cadence-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .cadence-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .cadence-duration {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* BRANCH FLOW */
+    .branch-flow {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .branch-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .branch-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid;
+      font-weight: 600;
+    }
+
+    .branch-main    { border-color: #fb7185; color: #fb7185; background: rgba(251,113,133,0.08); }
+    .branch-staging { border-color: #f4a74b; color: #f4a74b; background: rgba(244,167,75,0.08); }
+    .branch-develop { border-color: #4f8ef7; color: #4f8ef7; background: rgba(79,142,247,0.08); }
+    .branch-feature { border-color: #7dd3a8; color: #7dd3a8; background: rgba(125,211,168,0.08); }
+
+    .branch-arrow {
+      color: var(--text-muted);
+      font-size: 18px;
+    }
+
+    /* TIMELINE */
+    /* VERTICAL TIMELINE */
+    .timeline {
+      position: relative;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 20px;
+      bottom: 20px;
+      width: 2px;
+      background: linear-gradient(to bottom,
+        var(--accent) 0%,
+        var(--accent2) 40%,
+        var(--accent3) 70%,
+        #a78bfa 100%);
+      opacity: 0.3;
+    }
+
+    .week-entry {
+      display: flex;
+      gap: 20px;
+      padding-bottom: 28px;
+      position: relative;
+    }
+
+    .week-entry:last-child { padding-bottom: 0; }
+
+    .week-node {
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .week-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      border: 2px solid;
+      flex-shrink: 0;
+    }
+
+    .week-entry:nth-child(1) .week-dot { background: rgba(79,142,247,0.12); border-color: var(--accent); color: var(--accent); }
+    .week-entry:nth-child(2) .week-dot { background: rgba(125,211,168,0.12); border-color: var(--accent2); color: var(--accent2); }
+    .week-entry:nth-child(3) .week-dot { background: rgba(244,167,75,0.12); border-color: var(--accent3); color: var(--accent3); }
+    .week-entry:nth-child(4) .week-dot { background: rgba(167,139,250,0.12); border-color: #a78bfa; color: #a78bfa; }
+
+    .week-content {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      position: relative;
+      margin-top: 0;
+    }
+
+    .week-content::before {
+      content: '';
+      position: absolute;
+      left: -7px;
+      top: 14px;
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-right: 7px solid var(--border);
+    }
+
+    .week-content::after {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 15px;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 6px solid var(--surface);
+    }
+
+    .week-entry:nth-child(1) .week-content { border-left: 3px solid rgba(79,142,247,0.4); }
+    .week-entry:nth-child(2) .week-content { border-left: 3px solid rgba(125,211,168,0.4); }
+    .week-entry:nth-child(3) .week-content { border-left: 3px solid rgba(244,167,75,0.4); }
+    .week-entry:nth-child(4) .week-content { border-left: 3px solid rgba(167,139,250,0.4); }
+
+    .week-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .week-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .week-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .week-duration {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    .week-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .week-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      padding: 3px 10px;
+      background: var(--tag-bg);
+      border-radius: 4px;
+      color: var(--text-dim);
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+
+    .check-item:last-child { border-bottom: none; }
+    .check-item:hover { background: var(--surface2); }
+    .check-item.done { opacity: 0.5; }
+    .check-item.done .check-label { text-decoration: line-through; }
+
+    .check-box {
+      width: 18px; height: 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 5px;
+      flex-shrink: 0;
+      margin-top: 3px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      font-size: 12px;
+    }
+
+    .check-item.done .check-box {
+      background: var(--accent2);
+      border-color: var(--accent2);
+      color: #0d0f14;
+    }
+
+    .check-label {
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    .check-note {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 40px 0;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* LANG */
+    .th { display: block; }
+    .en { display: none; }
+    body.lang-en .th { display: none; }
+    body.lang-en .en { display: block; }
+    body.lang-en .th-inline { display: none; }
+    body.lang-en .en-inline { display: inline; }
+    .th-inline { display: inline; }
+    .en-inline { display: none; }
+
+    /* RESOURCE TABLE */
+    .resource-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .resource-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .resource-table tbody tr:last-child { border-bottom: none; }
+
+    .resource-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+    .resource-table td {
+      padding: 16px 24px 16px 0;
+      vertical-align: top;
+    }
+
+    .resource-table td:last-child { padding-right: 0; }
+
+    .res-tech {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .res-tech .stack-badge {
+      width: 120px;
+      text-align: center;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    .res-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .res-note {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .res-note code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      background: var(--surface2);
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--text-dim);
+    }
+
+    .res-links {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 2px;
+      min-width: 120px;
+    }
+
+    .res-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .res-links a::before {
+      content: '↗';
+      font-size: 11px;
+      opacity: 0.6;
+    }
+
+    .res-links a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .hero { padding: 48px 0 36px; }
+      .branch-flow { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* REFACTORED */
+
+    /* section-icon emoji variant */
+    .section-icon-emoji {
+      font-size: 20px;
+    }
+
+    /* branch-notes paragraph */
+    .branch-notes {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 16px;
+      line-height: 1.8;
+    }
+
+    /* inline dim text (used inside branch notes for <strong> labels) */
+    .text-dim {
+      color: var(--text-dim);
+    }
+
+    /* inline code style used in branch notes */
+    .code-inline {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      background: var(--surface2);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* conventional commits block wrapper */
+    .commits-block {
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* conventional commits heading row */
+    .commits-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    /* icon inside commits heading */
+    .commits-heading-icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    /* commits description line */
+    .commits-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    /* commit type badge row */
+    .commit-types {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    /* individual commit type pill */
+    .commit-type {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .commit-type-feat     { background: rgba(79,142,247,0.12);  color: #4f8ef7; border: 1px solid rgba(79,142,247,0.25); }
+    .commit-type-fix      { background: rgba(251,113,133,0.12); color: #fb7185; border: 1px solid rgba(251,113,133,0.25); }
+    .commit-type-refactor { background: rgba(125,211,168,0.12); color: #7dd3a8; border: 1px solid rgba(125,211,168,0.25); }
+    .commit-type-chore    { background: rgba(244,167,75,0.12);  color: #f4a74b; border: 1px solid rgba(244,167,75,0.25); }
+    .commit-type-docs     { background: rgba(167,139,250,0.12); color: #a78bfa; border: 1px solid rgba(167,139,250,0.25); }
+    .commit-type-test     { background: rgba(125,211,168,0.12); color: #7dd3a8; border: 1px solid rgba(125,211,168,0.25); }
+    .commit-type-perf     { background: rgba(244,167,75,0.12);  color: #f4a74b; border: 1px solid rgba(244,167,75,0.25); }
+    .commit-type-ci       { background: rgba(79,142,247,0.12);  color: #4f8ef7; border: 1px solid rgba(79,142,247,0.25); }
+    .commit-type-style    { background: rgba(34,211,238,0.12);  color: #22d3ee; border: 1px solid rgba(34,211,238,0.25); }
+
+    /* commit examples code block */
+    .commit-examples {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 2.2;
+    }
+
+    /* colored spans inside commit examples */
+    .cc-feat     { color: #4f8ef7; }
+    .cc-fix      { color: #fb7185; }
+    .cc-refactor { color: #7dd3a8; }
+    .cc-chore    { color: #f4a74b; }
+    .cc-docs     { color: #a78bfa; }
+    .cc-test     { color: #7dd3a8; }
+    .cc-perf     { color: #f4a74b; }
+    .cc-ci       { color: #4f8ef7; }
+    .cc-style    { color: #22d3ee; }
+
+    /* resource table badge alignment helper */
+    .res-badge {
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* subdued version label inside res-name */
+    .res-name-sub {
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-th" onclick="setLang('th')">TH</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="container">
+      <h1>
+        <span class="th">Fullstack Developer<br/>Onboarding Guide</span>
+        <span class="en">Fullstack Developer<br/>Onboarding Guide</span>
+      </h1>
+      <p class="hero-sub">
+        <span class="th">ภาพรวม Tech Stack, Tools, และ Resources สำหรับ Developer ที่เข้าร่วมทีมใหม่</span>
+        <span class="en">An overview of our Tech Stack, Tools, and Learning Resources for new team members.</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="container">
+
+      <!-- SECTION: Tech Stack -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-header-top">
+            <div class="section-icon"><img src="https://cdn.simpleicons.org/stackshare/0690FA" alt=""></div>
+            <div class="section-title">
+              <span class="th">Tech Stack</span>
+              <span class="en">Tech Stack</span>
+            </div>
+          </div>
+          <div class="section-subtitle">
+              <span class="th">เทคโนโลยีหลักที่ทีมใช้</span>
+              <span class="en">Core technologies we use</span>
+            </div>
+        </div>
+        <div class="stack-categories">
+
+          <div class="stack-category cat-frontend">
+            <span class="stack-cat-label">Frontend</span>
+            <div class="stack-pills">
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/remix/white" alt="">Remix.js (React Router v7)</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/typescript/3178C6" alt="">TypeScript</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="">TailwindCSS</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/shadcnui/white" alt="">ShadCN/UI</div>
+            </div>
+          </div>
+
+          <div class="stack-category cat-database">
+            <span class="stack-cat-label">Database</span>
+            <div class="stack-pills">
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/supabase/3FCF8E" alt="">Supabase</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/postgresql/4169E1" alt="">PostgreSQL</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/minio/C72E49" alt="">MinIO</div>
+            </div>
+          </div>
+
+          <div class="stack-category cat-ai">
+            <span class="stack-cat-label">AI</span>
+            <div class="stack-pills">
+              <div class="stack-pill"><span class="tool-logo-letter">L</span>LiteLLM</div>
+              <div class="stack-pill"><span class="tool-logo-letter">O</span>OpenWebUI</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/anthropic/D97757" alt="">Claude Code Skills</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/anthropic/D97757" alt="">MCP Servers</div>
+            </div>
+          </div>
+
+          <div class="stack-category cat-automation">
+            <span class="stack-cat-label">Automation</span>
+            <div class="stack-pills">
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/n8n/EA4B71" alt="">N8N</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/metabase/509EE3" alt="">Metabase</div>
+            </div>
+          </div>
+
+          <div class="stack-category cat-infra">
+            <span class="stack-cat-label">Infra</span>
+            <div class="stack-pills">
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/docker/2496ED" alt="">Docker</div>
+              <div class="stack-pill"><span class="tool-logo-letter">C</span>Coolify</div>
+              <div class="stack-pill"><span class="tool-logo-letter">N</span>Netbird</div>
+              <div class="stack-pill"><span class="tool-logo-letter">I</span>Infisical</div>
+            </div>
+          </div>
+
+          <div class="stack-category cat-quality">
+            <span class="stack-cat-label">Quality</span>
+            <div class="stack-pills">
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/eslint/4B32C3" alt="">ESLint + Prettier + Husky</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/vitest/6E9F18" alt="">Vitest</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/playwright/2EAD33" alt="">Playwright</div>
+              <div class="stack-pill"><span class="tool-logo-letter">B</span>OpenAPI + Bruno</div>
+            </div>
+          </div>
+
+          <div class="stack-category cat-quality">
+            <span class="stack-cat-label">Package</span>
+            <div class="stack-pills">
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="">Node.js</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/npm/CB3837" alt="">npm</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/yarn/2C8EBB" alt="">yarn</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION: Communication & Tools -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-header-top">
+            <div class="section-icon section-icon-emoji">💬</div>
+            <div class="section-title">
+              <span class="th">Communication & Tools</span>
+              <span class="en">Communication & Tools</span>
+            </div>
+          </div>
+          <div class="section-subtitle">
+            <span class="th">เครื่องมือในการทำงานร่วมกันของทีม</span>
+            <span class="en">Tools for team collaboration</span>
+          </div>
+        </div>
+        <div class="stack-categories">
+
+          <div class="stack-category cat-comms">
+            <span class="stack-cat-label">Comms</span>
+            <div class="stack-pills">
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/discord/5865F2" alt="">Discord</div>
+            </div>
+          </div>
+
+          <div class="stack-category cat-comms">
+            <span class="stack-cat-label">Project</span>
+            <div class="stack-pills">
+              <div class="stack-pill"><span class="tool-logo-letter">E</span>ERPNext</div>
+            </div>
+          </div>
+
+          <div class="stack-category cat-comms">
+            <span class="stack-cat-label">Time</span>
+            <div class="stack-pills">
+              <div class="stack-pill"><span class="tool-logo-letter">K</span>Kimai</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION: Git & CI/CD -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-header-top">
+            <div class="section-icon"><img src="https://cdn.simpleicons.org/git/F05032" alt=""></div>
+            <div class="section-title">
+              <span class="th">Git & CI/CD</span>
+              <span class="en">Git & CI/CD</span>
+            </div>
+          </div>
+          <div class="section-subtitle">
+              <span class="th">Version control และ deployment workflow</span>
+              <span class="en">Version control and deployment workflow</span>
+            </div>
+        </div>
+
+        <div class="branch-flow">
+          <div class="branch-item">
+            <span class="branch-tag branch-main">main</span>
+          </div>
+          <div class="branch-arrow">←</div>
+          <div class="branch-item">
+            <span class="branch-tag branch-staging">staging</span>
+          </div>
+          <div class="branch-arrow">←</div>
+          <div class="branch-item">
+            <span class="branch-tag branch-develop">develop</span>
+          </div>
+          <div class="branch-arrow">←</div>
+          <div class="branch-item">
+            <span class="branch-tag branch-feature">name/type-desc</span>
+          </div>
+        </div>
+
+        <p class="branch-notes">
+          <span class="th">
+            🔹 <strong class="text-dim">&lt;name&gt;/&lt;type&gt;-&lt;desc&gt;</strong> — ตั้งชื่อ branch ตามรูปแบบ <code class="code-inline">alice/feat-add-news-card</code> — ขึ้นต้นด้วยชื่อ employee ตามด้วย conventional type และ description<br/>
+            🔹 <strong class="text-dim">develop</strong> — branch หลักสำหรับรวม feature ก่อน test<br/>
+            🔹 <strong class="text-dim">staging</strong> — ทดสอบกับ environment ใกล้ production ก่อน merge<br/>
+            🔹 <strong class="text-dim">main</strong> — production branch ใช้ GitHub Actions deploy ผ่าน Coolify โดยอัตโนมัติ
+          </span>
+          <span class="en">
+            🔹 <strong class="text-dim">&lt;name&gt;/&lt;type&gt;-&lt;desc&gt;</strong> — Branch naming follows the pattern <code class="code-inline">alice/feat-add-news-card</code> — employee name prefix, then conventional type and description<br/>
+            🔹 <strong class="text-dim">develop</strong> — Main integration branch for merging features before testing.<br/>
+            🔹 <strong class="text-dim">staging</strong> — Pre-production testing environment before merging to main.<br/>
+            🔹 <strong class="text-dim">main</strong> — Production branch. GitHub Actions deploys automatically via Coolify.
+          </span>
+        </p>
+
+        <div class="commits-block">
+          <div class="commits-heading">
+            <img src="https://cdn.simpleicons.org/conventionalcommits/FE5196" class="commits-heading-icon" alt="">
+            <span class="th">Conventional Commits</span>
+            <span class="en">Conventional Commits</span>
+          </div>
+          <div class="commits-desc">
+            <span class="th">รูปแบบ commit message มาตรฐาน: <code class="code-inline">type(scope): description</code></span>
+            <span class="en">Standard commit message format: <code class="code-inline">type(scope): description</code></span>
+          </div>
+          <div class="commit-types">
+            <span class="commit-type commit-type-feat">feat</span>
+            <span class="commit-type commit-type-fix">fix</span>
+            <span class="commit-type commit-type-refactor">refactor</span>
+            <span class="commit-type commit-type-chore">chore</span>
+            <span class="commit-type commit-type-docs">docs</span>
+            <span class="commit-type commit-type-test">test</span>
+            <span class="commit-type commit-type-perf">perf</span>
+            <span class="commit-type commit-type-ci">ci</span>
+            <span class="commit-type commit-type-style">style</span>
+          </div>
+          <div class="commit-examples">
+            <span class="cc-feat">feat</span><span class="cc-feat">(auth):</span> add JWT refresh token support<br/>
+            <span class="cc-fix">fix</span><span class="cc-fix">(api):</span> handle null response from payment gateway<br/>
+            <span class="cc-refactor">refactor</span><span class="cc-refactor">(db):</span> extract query builder into repository<br/>
+            <span class="cc-chore">chore</span><span class="cc-chore">(deps):</span> upgrade supabase-js to v2.45<br/>
+            <span class="cc-docs">docs</span><span class="cc-docs">:</span> update onboarding guide with MCP setup<br/>
+            <span class="cc-test">test</span><span class="cc-test">(loader):</span> add unit tests for dashboard loader<br/>
+            <span class="cc-perf">perf</span><span class="cc-perf">(query):</span> add index on created_at column<br/>
+            <span class="cc-ci">ci</span><span class="cc-ci">:</span> add lint check to GitHub Actions workflow<br/>
+            <span class="cc-style">style</span><span class="cc-style">(home):</span> change hero section padding
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: Team Rhythm -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-header-top">
+            <div class="section-icon"><img src="https://cdn.simpleicons.org/googlecalendar/4285F4" alt=""></div>
+            <div class="section-title">
+              <span class="th">Team Rhythm</span>
+              <span class="en">Team Rhythm</span>
+            </div>
+          </div>
+          <div class="section-subtitle">
+            <span class="th">รูปแบบการประชุมและ cadence ของทีม</span>
+            <span class="en">Meeting cadence and recurring team rituals</span>
+          </div>
+        </div>
+
+        <div class="cadence-grid">
+
+          <div class="cadence-card cadence-daily">
+            <span class="cadence-freq">
+              <span class="th">ทุกวัน</span>
+              <span class="en">Daily</span>
+            </span>
+            <div class="cadence-time">09:30</div>
+            <div class="cadence-title">Daily Standup</div>
+            <div class="cadence-desc">
+              <span class="th">อัพเดต 3 อย่าง — เมื่อวานทำอะไร, วันนี้จะทำอะไร, มี blocker ไหม</span>
+              <span class="en">3 updates — what you did yesterday, what you're doing today, any blockers</span>
+            </div>
+            <div class="cadence-duration">⏱ 15 – 30 min</div>
+          </div>
+
+          <div class="cadence-card cadence-sprint">
+            <span class="cadence-freq">
+              <span class="th">ทุก 2 สัปดาห์</span>
+              <span class="en">Every 2 weeks</span>
+            </span>
+            <div class="cadence-time">Sprint</div>
+            <div class="cadence-title">Sprint Meeting</div>
+            <div class="cadence-desc">
+              <span class="th">Review งานที่ทำเสร็จใน sprint ที่ผ่านมา และวางแผน sprint ถัดไป</span>
+              <span class="en">Review completed work from the last sprint and plan tasks for the next one</span>
+            </div>
+            <div class="cadence-duration">⏱ 1 – 2 hr</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION: Day 1 Preparation -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-header-top">
+            <div class="section-icon section-icon-emoji">🚀</div>
+            <div class="section-title">
+              <span class="th">Day 1 Preparation</span>
+              <span class="en">Day 1 Preparation</span>
+            </div>
+          </div>
+          <div class="section-subtitle">
+            <span class="th">ให้ access เข้าใช้งาน tools ของบริษัทให้ครบก่อนเริ่มทำงาน</span>
+            <span class="en">Get access to all company tools before you start</span>
+          </div>
+        </div>
+
+        <div class="prep-groups">
+
+          <div class="prep-row prep-row-install">
+            <span class="prep-row-label">Install</span>
+            <div class="prep-items">
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <span class="tool-logo-letter">N</span>
+                <span class="prep-name">NVM</span>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <img class="tool-logo" src="https://cdn.simpleicons.org/docker/2496ED" alt="">
+                <span class="prep-name">Docker</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prep-row prep-row-join">
+            <span class="prep-row-label">Join</span>
+            <div class="prep-items">
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <img class="tool-logo" src="https://cdn.simpleicons.org/github/FFFFFF" alt="">
+                <span class="prep-name">GitHub Org</span>
+                <a class="prep-link" href="https://github.com/tongHuaLabs" target="_blank">↗</a>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <img class="tool-logo" src="https://cdn.simpleicons.org/discord/5865F2" alt="">
+                <span class="prep-name">Discord</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prep-row prep-row-access">
+            <span class="prep-row-label">Access</span>
+            <div class="prep-items">
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <span class="tool-logo-letter">L</span>
+                <span class="prep-name">LiteLLM</span>
+                <a class="prep-link" href="https://models.thcloud.ai/" target="_blank">↗</a>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <span class="tool-logo-letter">O</span>
+                <span class="prep-name">OpenWebUI</span>
+                <a class="prep-link" href="https://chat.thit.thcloud.ai/" target="_blank">↗</a>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <img class="tool-logo" src="https://cdn.simpleicons.org/n8n/EA4B71" alt="">
+                <span class="prep-name">N8N</span>
+                <a class="prep-link" href="http://n8n.thcloud.ai/" target="_blank">↗</a>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <img class="tool-logo" src="https://cdn.simpleicons.org/metabase/509EE3" alt="">
+                <span class="prep-name">Metabase</span>
+                <a class="prep-link" href="https://bi.thcloud.ai/" target="_blank">↗</a>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <span class="tool-logo-letter">N</span>
+                <span class="prep-name">Netbird</span>
+                <a class="prep-link" href="https://netbird.thit.io/" target="_blank">↗</a>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <span class="tool-logo-letter">I</span>
+                <span class="prep-name">Infisical</span>
+                <a class="prep-link" href="https://infisical.thit.thcloud.ai/" target="_blank">↗</a>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <span class="tool-logo-letter">C</span>
+                <span class="prep-name">Coolify</span>
+                <a class="prep-link" href="https://coolify.thit.io/" target="_blank">↗</a>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <span class="tool-logo-letter">E</span>
+                <span class="prep-name">ERPNext</span>
+                <a class="prep-link" href="https://erp.thit.io/" target="_blank">↗</a>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <span class="tool-logo-letter">K</span>
+                <span class="prep-name">Kimai</span>
+                <a class="prep-link" href="https://kimai.thit.io/" target="_blank">↗</a>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <img class="tool-logo" src="https://cdn.simpleicons.org/synology/B5B5B6" alt="">
+                <span class="prep-name">Synology Drive</span>
+                <a class="prep-link" href="https://drive.tonghuagroup.com/" target="_blank">↗</a>
+              </div>
+              <div class="prep-item" onclick="toggleCheck(this)">
+                <span class="prep-check"></span>
+                <img class="tool-logo" src="https://cdn.simpleicons.org/minio/C72E49" alt="">
+                <span class="prep-name">MinIO</span>
+                <a class="prep-link" href="https://minio.thcloud.ai" target="_blank">↗</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION: Learning Path -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-header-top">
+            <div class="section-icon"><img src="https://cdn.simpleicons.org/mdnwebdocs/FFFFFF" alt=""></div>
+            <div class="section-title">
+              <span class="th">Learning Resources</span>
+              <span class="en">Learning Resources</span>
+            </div>
+          </div>
+          <div class="section-subtitle">
+              <span class="th">แหล่งเรียนรู้แนะนำสำหรับแต่ละ tech</span>
+              <span class="en">Recommended learning resources per technology</span>
+            </div>
+        </div>
+        <table class="resource-table">
+          <tbody>
+            <!-- FRONTEND -->
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-frontend res-badge">Frontend</span>
+                  <div>
+                    <div class="res-name">Remix.js <span class="res-name-sub">/ React Router v7</span></div>
+                    <div class="res-note">
+                      <span class="th"><code>loader</code>, <code>action</code>, nested routes — เริ่มที่ "Framework mode"</span>
+                      <span class="en"><code>loader</code>, <code>action</code>, nested routes — start with "Framework mode"</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://reactrouter.com/home" target="_blank">Official Docs</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-frontend res-badge">Frontend</span>
+                  <div>
+                    <div class="res-name">TailwindCSS</div>
+                    <div class="res-note">
+                      <span class="th">Responsive prefix, dark mode, arbitrary values</span>
+                      <span class="en">Responsive prefixes, dark mode, arbitrary values</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://tailwindcss.com/docs" target="_blank">Docs</a>
+                <a href="https://play.tailwindcss.com" target="_blank">Playground</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-frontend res-badge">Frontend</span>
+                  <div>
+                    <div class="res-name">ShadCN/UI</div>
+                    <div class="res-note">
+                      <span class="th">Component จะ copy เข้า project โดยตรง — เข้าใจ <code>cn()</code> และ Radix primitives</span>
+                      <span class="en">Components are copied directly into your project — understand <code>cn()</code> and Radix primitives</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://ui.shadcn.com/docs" target="_blank">Docs</a>
+              </td>
+            </tr>
+            <!-- DATABASE -->
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-database res-badge">Database</span>
+                  <div>
+                    <div class="res-name">Supabase</div>
+                    <div class="res-note">
+                      <span class="th">Auth, Supabase-js, Migrations — RLS (Optional)</span>
+                      <span class="en">Auth, Supabase-js, Migrations — RLS (Optional)</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://supabase.com/docs" target="_blank">Docs</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-database res-badge">Database</span>
+                  <div>
+                    <div class="res-name">PostgreSQL</div>
+                    <div class="res-note">
+                      <span class="th">JOIN types, indexes, transactions — แนะนำ DBeaver หรือ Supabase Dashboard</span>
+                      <span class="en">JOIN types, indexes, transactions — use DBeaver or Supabase Dashboard</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://www.postgresqltutorial.com" target="_blank">Tutorial</a>
+                <a href="https://dbeaver.io" target="_blank">DBeaver</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-database res-badge">Database</span>
+                  <div>
+                    <div class="res-name">MinIO</div>
+                    <div class="res-note">
+                      <span class="th">S3-compatible — ใช้ AWS SDK ได้เลย, ระวัง bucket policy และ access keys</span>
+                      <span class="en">S3-compatible — works with standard AWS SDK, watch bucket policies and access keys</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://min.io/docs/minio/linux/index.html" target="_blank">Docs</a>
+              </td>
+            </tr>
+            <!-- AI -->
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-ai res-badge">AI</span>
+                  <div>
+                    <div class="res-name">Claude Code Skills</div>
+                    <div class="res-note">
+                      <span class="th">ไฟล์ <code>.md</code> ใน <code>~/.claude/skills/</code> → slash command — <code>cp skill.md ~/.claude/skills/</code> แล้วใช้ <code>/skill</code></span>
+                      <span class="en"><code>.md</code> files in <code>~/.claude/skills/</code> become slash commands — <code>cp skill.md ~/.claude/skills/</code> then <code>/skill</code></span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://docs.anthropic.com/en/docs/claude-code/skills" target="_blank">Docs</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-ai res-badge">AI</span>
+                  <div>
+                    <div class="res-name">MCP Servers</div>
+                    <div class="res-note">
+                      <span class="th">เชื่อม Claude กับ tools ภายนอก — <code>claude mcp add &lt;name&gt; -- npx -y &lt;pkg&gt;</code></span>
+                      <span class="en">Connects Claude to external tools — <code>claude mcp add &lt;name&gt; -- npx -y &lt;pkg&gt;</code></span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://docs.anthropic.com/en/docs/claude-code/mcp" target="_blank">Docs</a>
+              </td>
+            </tr>
+            <!-- AUTOMATION -->
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-tools res-badge">Automation</span>
+                  <div>
+                    <div class="res-name">N8N</div>
+                    <div class="res-note">
+                      <span class="th">Node types, expressions <code>{{ $json }}</code>, credentials</span>
+                      <span class="en">Node types, expressions <code>{{ $json }}</code>, credentials</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://docs.n8n.io" target="_blank">Docs</a>
+                <a href="https://www.youtube.com/watch?v=1MwSoB0gnM4" target="_blank">Tutorial</a>
+              </td>
+            </tr>
+            <!-- INFRA -->
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-infra res-badge">Infra</span>
+                  <div>
+                    <div class="res-name">Docker</div>
+                    <div class="res-note">
+                      <span class="th"><code>docker-compose.yml</code>, volumes, networking — คำสั่งบ่อย: <code>up -d</code> <code>logs -f</code> <code>exec -it</code></span>
+                      <span class="en"><code>docker-compose.yml</code>, volumes, networking — common: <code>up -d</code> <code>logs -f</code> <code>exec -it</code></span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://docs.docker.com/get-started/" target="_blank">Getting Started</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-infra res-badge">Infra</span>
+                  <div>
+                    <div class="res-name">Infisical</div>
+                    <div class="res-note">
+                      <span class="th">Projects, Environments (dev/staging/prod), Secret Injection — ใช้ CLI แทนการ copy <code>.env</code></span>
+                      <span class="en">Projects, Environments, Secret Injection — use CLI instead of copying <code>.env</code> manually</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://infisical.com/docs/documentation/getting-started/introduction" target="_blank">Docs</a>
+              </td>
+            </tr>
+            <!-- QUALITY -->
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-quality res-badge">Quality</span>
+                  <div>
+                    <div class="res-name">Bruno</div>
+                    <div class="res-note">
+                      <span class="th">Postman alternative — collection เก็บเป็น file ใน Git ได้</span>
+                      <span class="en">Postman alternative — collections stored as files in Git</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://docs.usebruno.com" target="_blank">Docs</a>
+                <a href="https://www.usebruno.com/downloads" target="_blank">Download</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-quality res-badge">Quality</span>
+                  <div>
+                    <div class="res-name">Vitest + Playwright</div>
+                    <div class="res-note">
+                      <span class="th">Vitest = unit test (drop-in Jest), Playwright = E2E browser testing</span>
+                      <span class="en">Vitest = unit testing (drop-in Jest), Playwright = E2E browser testing</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://vitest.dev" target="_blank">Vitest</a>
+                <a href="https://playwright.dev" target="_blank">Playwright</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- SECTION: Suggested Learning Path -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-header-top">
+            <div class="section-icon"><img src="https://cdn.simpleicons.org/roadmapdotsh/FFFFFF" alt=""></div>
+            <div class="section-title">
+              <span class="th">Suggested Learning Path</span>
+              <span class="en">Suggested Learning Path</span>
+            </div>
+          </div>
+          <div class="section-subtitle">
+              <span class="th">5 สัปดาห์แรกควรโฟกัสอะไร</span>
+              <span class="en">What to focus on in the first 5 weeks</span>
+            </div>
+        </div>
+        <div class="timeline">
+
+          <div class="week-entry">
+            <div class="week-node">
+              <div class="week-dot">01</div>
+            </div>
+            <div class="week-content">
+              <div class="week-header">
+                <span class="week-label">WEEK 01</span>
+                <span class="week-title">
+                  <span class="th">Infrastructure</span>
+                  <span class="en">Infrastructure</span>
+                </span>
+                <span class="week-duration">
+                  <span class="th">1 สัปดาห์</span>
+                  <span class="en">1 week</span>
+                </span>
+              </div>
+              <div class="week-tags">
+                <span class="week-tag">Docker</span>
+                <span class="week-tag">PostgreSQL</span>
+                <span class="week-tag">Supabase</span>
+                <span class="week-tag">Netbird</span>
+                <span class="week-tag">MinIO</span>
+                <span class="week-tag">Infisical</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="week-entry">
+            <div class="week-node">
+              <div class="week-dot">02</div>
+            </div>
+            <div class="week-content">
+              <div class="week-header">
+                <span class="week-label">WEEK 02 – 03</span>
+                <span class="week-title">Frontend Stack</span>
+                <span class="week-duration">
+                  <span class="th">2 สัปดาห์</span>
+                  <span class="en">2 weeks</span>
+                </span>
+              </div>
+              <div class="week-tags">
+                <span class="week-tag">TypeScript</span>
+                <span class="week-tag">Remix.js</span>
+                <span class="week-tag">TailwindCSS</span>
+                <span class="week-tag">ShadCN/UI</span>
+                <span class="week-tag">API Integration</span>
+                <span class="week-tag">Bruno</span>
+                <span class="week-tag">Vitest</span>
+                <span class="week-tag">ESLint / Prettier</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="week-entry">
+            <div class="week-node">
+              <div class="week-dot">04</div>
+            </div>
+            <div class="week-content">
+              <div class="week-header">
+                <span class="week-label">WEEK 04</span>
+                <span class="week-title">AI &amp; Automation</span>
+                <span class="week-duration">
+                  <span class="th">1 สัปดาห์</span>
+                  <span class="en">1 week</span>
+                </span>
+              </div>
+              <div class="week-tags">
+                <span class="week-tag">N8N</span>
+                <span class="week-tag">LiteLLM</span>
+                <span class="week-tag">OpenWebUI</span>
+                <span class="week-tag">Metabase</span>
+                <span class="week-tag">Claude Code Skills</span>
+                <span class="week-tag">MCP Servers</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="week-entry">
+            <div class="week-node">
+              <div class="week-dot">05</div>
+            </div>
+            <div class="week-content">
+              <div class="week-header">
+                <span class="week-label">WEEK 05</span>
+                <span class="week-title">
+                  <span class="th">Testing &amp; Deployment</span>
+                  <span class="en">Testing &amp; Deployment</span>
+                </span>
+                <span class="week-duration">
+                  <span class="th">1 สัปดาห์</span>
+                  <span class="en">1 week</span>
+                </span>
+              </div>
+              <div class="week-tags">
+                <span class="week-tag">GitHub Flow</span>
+                <span class="week-tag">Playwright</span>
+                <span class="week-tag">Coolify</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <span class="th">Fullstack Developer Onboarding Guide · อัปเดตล่าสุด มีนาคม 2568</span>
+      <span class="en">Fullstack Developer Onboarding Guide · Last updated March 2025</span>
+    </div>
+  </div>
+
+  <script>
+    function setLang(lang) {
+      document.body.classList.toggle('lang-en', lang === 'en');
+      document.getElementById('btn-th').classList.toggle('active', lang === 'th');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    }
+
+    function toggleCheck(el) {
+      el.classList.toggle('done');
+    }
+  </script>
+</body>
+</html>
