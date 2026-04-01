@@ -523,10 +523,10 @@
       flex-shrink: 0;
     }
 
-    .week-entry:nth-child(1) .week-dot { background: rgba(79,142,247,0.12); border-color: var(--accent); color: var(--accent); }
-    .week-entry:nth-child(2) .week-dot { background: rgba(125,211,168,0.12); border-color: var(--accent2); color: var(--accent2); }
-    .week-entry:nth-child(3) .week-dot { background: rgba(244,167,75,0.12); border-color: var(--accent3); color: var(--accent3); }
-    .week-entry:nth-child(4) .week-dot { background: rgba(167,139,250,0.12); border-color: #a78bfa; color: #a78bfa; }
+    .week-entry:nth-child(1) .week-dot { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .week-entry:nth-child(2) .week-dot { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+    .week-entry:nth-child(3) .week-dot { background: var(--accent3); border-color: var(--accent3); color: #fff; }
+    .week-entry:nth-child(4) .week-dot { background: #a78bfa; border-color: #a78bfa; color: #fff; }
 
     .week-content {
       flex: 1;
@@ -976,6 +976,8 @@
               <div class="stack-pill"><span class="tool-logo-letter">O</span>OpenWebUI</div>
               <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/anthropic/D97757" alt="">Claude Code Skills</div>
               <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/anthropic/D97757" alt="">MCP Servers</div>
+              <div class="stack-pill"><span class="tool-logo-letter">M</span>MindsDB</div>
+              <div class="stack-pill"><img class="tool-logo" src="https://cdn.simpleicons.org/google/4285F4" alt="">GenAI Toolbox</div>
             </div>
           </div>
 
@@ -1477,6 +1479,40 @@
                 <a href="https://docs.anthropic.com/en/docs/claude-code/mcp" target="_blank">Docs</a>
               </td>
             </tr>
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-ai res-badge">AI</span>
+                  <div>
+                    <div class="res-name">MindsDB</div>
+                    <div class="res-note">
+                      <span class="th">AI Database — สร้าง ML model และเรียก LLM ผ่าน SQL โดยตรง, เชื่อมต่อกับ data source ต่างๆ</span>
+                      <span class="en">AI Database — create ML models and call LLMs directly via SQL, connects to various data sources</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://docs.mindsdb.com/" target="_blank">Docs</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="res-tech">
+                  <span class="stack-badge badge-ai res-badge">AI</span>
+                  <div>
+                    <div class="res-name">GenAI Toolbox</div>
+                    <div class="res-note">
+                      <span class="th">เชื่อม AI agents กับ database — จัดการ connection pooling, auth, schema inspection อัตโนมัติ</span>
+                      <span class="en">Connect AI agents to databases — handles connection pooling, auth, and schema inspection automatically</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="res-links">
+                <a href="https://googleapis.github.io/genai-toolbox/" target="_blank">Docs</a>
+              </td>
+            </tr>
             <!-- AUTOMATION -->
             <tr>
               <td>
@@ -1649,30 +1685,6 @@
             <div class="week-content">
               <div class="week-header">
                 <span class="week-label">WEEK 04</span>
-                <span class="week-title">AI &amp; Automation</span>
-                <span class="week-duration">
-                  <span class="th">1 สัปดาห์</span>
-                  <span class="en">1 week</span>
-                </span>
-              </div>
-              <div class="week-tags">
-                <span class="week-tag">N8N</span>
-                <span class="week-tag">LiteLLM</span>
-                <span class="week-tag">OpenWebUI</span>
-                <span class="week-tag">Metabase</span>
-                <span class="week-tag">Claude Code Skills</span>
-                <span class="week-tag">MCP Servers</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="week-entry">
-            <div class="week-node">
-              <div class="week-dot">05</div>
-            </div>
-            <div class="week-content">
-              <div class="week-header">
-                <span class="week-label">WEEK 05</span>
                 <span class="week-title">
                   <span class="th">Testing &amp; Deployment</span>
                   <span class="en">Testing &amp; Deployment</span>
@@ -1686,6 +1698,32 @@
                 <span class="week-tag">GitHub Flow</span>
                 <span class="week-tag">Playwright</span>
                 <span class="week-tag">Coolify</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="week-entry">
+            <div class="week-node">
+              <div class="week-dot">05</div>
+            </div>
+            <div class="week-content">
+              <div class="week-header">
+                <span class="week-label">WEEK 05</span>
+                <span class="week-title">AI &amp; Automation</span>
+                <span class="week-duration">
+                  <span class="th">1 สัปดาห์</span>
+                  <span class="en">1 week</span>
+                </span>
+              </div>
+              <div class="week-tags">
+                <span class="week-tag">N8N</span>
+                <span class="week-tag">LiteLLM</span>
+                <span class="week-tag">OpenWebUI</span>
+                <span class="week-tag">Metabase</span>
+                <span class="week-tag">Claude Code Skills</span>
+                <span class="week-tag">MCP Servers</span>
+                <span class="week-tag">MindsDB</span>
+                <span class="week-tag">GenAI Toolbox</span>
               </div>
             </div>
           </div>
